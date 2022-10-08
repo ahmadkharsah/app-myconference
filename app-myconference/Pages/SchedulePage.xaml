@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:app_myconference.Models"
+             xmlns:viewmodel="clr-namespace:app_myconference.ViewModels"
+             x:DataType="viewmodel:ScheduleViewModel"
+             x:Class="app_myconference.Pages.SchedulePage"
+             Title="Schedule">
+    <ListView ItemsSource="{Binding Schedule}"
+              HasUnevenRows="True"
+              IsGroupingEnabled="True"
+              SeparatorVisibility="None"
+              GroupDisplayBinding="{Binding Key}">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate x:DataType="{x:Null}">
+                <ViewCell>
+                    <Grid Padding="10,10,8,8">
+                        <Label Text="{Binding Key}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>                    
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Session">
+                <ViewCell>
+                    <Grid Padding="10">
+                        <Border>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"></RoundRectangle>
+                            </Border.StrokeShape>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold"></Label>
+                                <Label Text="{Binding Room, StringFormat='Room: {0}'}"></Label>
+                                <Label Text="{Binding Speaker.SpeakerDisplay, StringFormat='Speaker: {0}'}"></Label>
+                                <Label Text="{Binding Speaker.Company, StringFormat='Company: {0}'}"></Label>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
